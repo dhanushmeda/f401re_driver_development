@@ -4,8 +4,9 @@
 ../drivers/Src/stm32f4xx_spi_driver.c:114:6:SPI_PeripheralControl	2
 ../drivers/Src/stm32f4xx_spi_driver.c:127:9:SPI_GetFlagStatus	2
 ../drivers/Src/stm32f4xx_spi_driver.c:135:6:SPI_SSIConfig	2
-../drivers/Src/stm32f4xx_spi_driver.c:148:6:SPI_SendData	4
-../drivers/Src/stm32f4xx_spi_driver.c:176:6:SPI_ReceiveData	1
-../drivers/Src/stm32f4xx_spi_driver.c:181:6:SPI_IRQITConfig	1
-../drivers/Src/stm32f4xx_spi_driver.c:186:6:SPI_IRQPriorityConfig	1
-../drivers/Src/stm32f4xx_spi_driver.c:191:6:SPI_IRQHandling	1
+../drivers/Src/stm32f4xx_spi_driver.c:148:6:SPI_SSOEConfig	2
+../drivers/Src/stm32f4xx_spi_driver.c:160:6:SPI_SendData	4
+../drivers/Src/stm32f4xx_spi_driver.c:188:6:SPI_ReceiveData	4
+../drivers/Src/stm32f4xx_spi_driver.c:213:6:SPI_IRQITConfig	1
+../drivers/Src/stm32f4xx_spi_driver.c:218:6:SPI_IRQPriorityConfig	1
+../drivers/Src/stm32f4xx_spi_driver.c:223:6:SPI_IRQHandling	1

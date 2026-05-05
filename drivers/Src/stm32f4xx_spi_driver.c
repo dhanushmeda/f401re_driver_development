@@ -145,6 +145,18 @@ void SPI_SSIConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi)
 	}
 }
 
+void SPI_SSOEConfig(SPI_RegDef_t *pSPIx, uint8_t EnOrDi)
+{
+	if (EnOrDi == ENABLE)
+		{
+			pSPIx->CR2 |= (1<<SPI_CR2_SSOE);
+		}
+		else
+		{
+			pSPIx->CR2 &= ~(1<<SPI_CR2_SSOE);
+		}
+}
+
 void SPI_SendData(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t len)
 {
 	//len is number of bytes to be transferred
@@ -173,9 +185,29 @@ void SPI_SendData(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t len)
 	}
 }
 
-void SPI_ReceiveData(SPI_RegDef_t *pSPIx, uint8_t pRxBuffer, uint32_t len)
+void SPI_ReceiveData(SPI_RegDef_t *pSPIx, uint8_t *pRxBuffer, uint32_t len)
 {
+	while (len > 0)
+	{
+		while (! SPI_GetFlagStatus(pSPIx, SPI_SR_RXNE));
+		if ((pSPIx->CR1) & (1<<SPI_CR1_DFF))
+		{
+			//16bit dff
+			// load data into data register
+			*((uint16_t *)pRxBuffer) = pSPIx->DR;
+			len=len-2;
+			pRxBuffer += 2;
+		}
+		else
+		{
+			//8bit dff
+			// load data into data register
+			*pRxBuffer = pSPIx->DR;
+			len=len-1;
+			pRxBuffer += 1;
+		}
 
+	}
 }
 
 void SPI_IRQITConfig(uint8_t IRQNumber,  uint8_t EnorDi)
